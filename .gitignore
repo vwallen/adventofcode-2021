@@ -1,0 +1,7 @@
+/target
+
+# input files
+/input/*.txt
+
+# usual cruft
+.Ds_Store
