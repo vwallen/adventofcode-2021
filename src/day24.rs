@@ -199,10 +199,6 @@ fn parse_source_per_input(src: &str) -> Vec<Program> {
     progs
 }
 
-fn number_to_digits(n:i64) -> Vec<i64> {
-    n.to_string().chars().map(|d| d.to_digit(10).unwrap() as i64).collect()
-}
-
 // The source is the same pattern repeated 14 times with 3 different parameters
 // and one retained value from previous iterations, so it's faster just to hard
 // code that and retain either the highest or lowest retained value that resolves
@@ -276,50 +272,6 @@ pub fn part_2() -> Option<String> {
 
     res.get(&0).map(String::from)
 }
-
-    /*
-fn part_1() {
-    // this is great and all, but actually building and running the APL
-    // results in O(n) performance at best, so the whole puzzle is a red
-    // herring to trigger a O(9**14) process
-    let src = include_str!("monad.prog");
-    let mut prog = parse_source(src);
-
-    let mut is_valid = false;
-    let mut last_d = 0;
-
-    for m in 0..9999999 {
-        let m2 = 9999999 - m;
-        let a = number_to_digits(m2);
-        if a.contains(&0) { continue; }
-
-        for n in 0..9999999 {
-            let n2 = 9999999 - n;
-            let b = number_to_digits(n2);
-            if b.contains(&0) { continue; }
-
-            prog.reset();
-
-            for i in a.iter() { prog.push_input(*i); }
-            for j in b.iter() { prog.push_input(*j); }
-
-            prog.run();
-
-            is_valid = prog.get_result(Z) == Some(0);
-            if is_valid {
-                println!("Valid serial number: {}{}", m2, n2);
-                break;
-            }
-            if last_d == 1_000_000 {
-                println!("{}{}", m2, n2);
-                last_d = 0;
-            }
-            last_d += 1;
-        }   
-    }
-}
-    */
-
 
 #[cfg(test)]
 mod test {
